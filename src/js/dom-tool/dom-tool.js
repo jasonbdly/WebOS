@@ -6,6 +6,8 @@ export function dom(target) {
 	return new DOMNode(target);
 }
 
+// TODO: Clean up the duplicated logic between Node and NodeList functionality.
+
 export default class DOMNode {
 	constructor(target) {
 		this._id = _id++;
