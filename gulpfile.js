@@ -88,8 +88,9 @@ gulp.task('uglify-js', function(done) {
 	], done);
 });
 
-gulp.task('watch-js', function() {
+gulp.task('watch', function() {
 	gulp.watch('./src/js/**/*.js', gulp.series('js'));
+	gulp.watch('./src/css/**/*.css', gulp.series('css'));
 });
 
 gulp.task('lint-css', function(done) {
