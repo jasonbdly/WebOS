@@ -164,6 +164,32 @@ export default class DOMNode {
 		return this;
 	}
 
+	parent() {
+		if (utils.isNodeList(this.elem)) {
+			return Array.from(this.elem).map(node => dom(node).parent());
+		} else {
+			return dom(this.elem.parentNode);
+		}
+	}
+
+	hide() {
+		if (utils.isNodeList(this.elem)) {
+			Array.from(this.elem).forEach(node => dom(node).hide());
+		} else {
+			dom(this.elem).css('display', 'none');
+		}
+		return this;
+	}
+
+	show() {
+		if (utils.isNodeList(this.elem)) {
+			Array.from(this.elem).forEach(node => dom(node).show());
+		} else {
+			dom(this.elem).css('display', '');
+		}
+		return this;
+	}
+
 	ready(evtHandler) {
 		if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
 			evtHandler();
