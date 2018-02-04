@@ -1,5 +1,6 @@
 import DOMNode from './dom-tool/dom-tool';
 import { dom } from './dom-tool/dom-tool';
+require('babelify-es6-polyfill');
 
 window.DOMNode = DOMNode;
 window.dom = dom;

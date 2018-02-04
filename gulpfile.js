@@ -16,13 +16,6 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 
-let ProjectName = 'WebOS';
-let headerContent = `
-;(function() {
-	var api = window.${ProjectName} || (window.${ProjectName} = {});
-`;
-let footerContent = `})();`;
-
 gulp.task('lint-js', function(done) {
 	pump([
 		gulp.src('./src/js/*.js'),

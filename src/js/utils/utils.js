@@ -27,7 +27,7 @@ export function isNodeList(val) {
 }
 
 export function parseHTML(htmlString) {
-	var tmpElement = document.implementation.createHTMLDocument();
+	var tmpElement = document.implementation.createHTMLDocument('');
 	tmpElement.body.innerHTML = htmlString;
 	return tmpElement.body.children;
 }

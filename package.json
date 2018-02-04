@@ -36,13 +36,15 @@
 	"browserify": {
 		"transform": [
 			[
-				"babelify",
-				{
+				"babelify", {
 					"presets": [
 						"es2015"
 					]
 				}
 			]
 		]
+	},
+	"dependencies": {
+		"babelify-es6-polyfill": "^1.0.4"
 	}
 }
