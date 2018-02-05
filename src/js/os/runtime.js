@@ -78,7 +78,7 @@ export default class OS {
 			});
 
 			this._commandProcessorStream = new Stream(nextLine => {
-				this.writeOutput('\r\n' + this._awaitingInputSymbol + nextLine);
+				this.writeOutput('\r\n' + this._awaitingInputSymbol + nextLine, 'info');
 				this.processCommand(nextLine);
 				this.$input.value(this._cursorPrefix).focus();
 			});
@@ -95,7 +95,7 @@ export default class OS {
 					dom('<div/>')
 					.addClass(nextLineData.type)
 					.text(nextLineData.value)
-				);
+				).scrollToBottom();
 			});
 
 			this.init();
@@ -160,7 +160,7 @@ export default class OS {
 			var result = await programs[programName].apply(this, commandArgs);
 
 			if (result) {
-				this.writeOutput(result, 'status');
+				this.writeOutput(result);
 			}
 		} catch (error) {
 			this.writeOutput(error.message, 'error');

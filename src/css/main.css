@@ -7,13 +7,13 @@ body, html {
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
-	background-color: rgb(0, 0, 0);
+	background-color: rgb(30, 30, 30);
 	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
 }
 
 .terminal {
-	background-color: rgb(0, 0, 0);
-	color: rgb(36, 206, 6);
+	background-color: rgba(0, 0, 0, 0);
+	color: rgb(131, 234, 83);
 	font-size: 20pt;
 	padding-left: 10px;
 }
@@ -29,9 +29,15 @@ body, html {
 
 .terminal.terminal-output {
 	white-space: pre-line;
+	max-height: 95vh;
+	overflow: auto;
+}
+
+.terminal.terminal-output > .info {
 }
 
 .terminal.terminal-output > .status {
+	color: rgb(241, 241, 241);
 }
 
 .terminal.terminal-output > .error {

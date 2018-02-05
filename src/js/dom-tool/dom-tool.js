@@ -347,5 +347,15 @@ export default class DOMNode {
 		} else {
 			this.elem.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
 		}
+		return this;
+	}
+
+	scrollToBottom() {
+		if (utils.isNodeList(this.elem)) {
+			dom(this.elem[this.elem.length - 1]).scrollToBottom();
+		} else {
+			this.elem.scrollTop = this.elem.scrollHeight;
+		}
+		return this;
 	}
 }
