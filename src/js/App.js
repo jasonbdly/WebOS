@@ -20,5 +20,5 @@ dom(document).ready(() => {
 		.append($output)
 		.append($input);
 
-	var os = new OS($input, $output, ' > ');
+	var os = new OS($input, $output, ' $ ');
 });

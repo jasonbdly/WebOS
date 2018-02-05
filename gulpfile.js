@@ -53,6 +53,9 @@ gulp.task('concat-js', function(done) {
 				babelify.configure({
 					presets: [
 						['es2015']
+					],
+					plugins: [
+						['transform-regenerator']
 					]
 				})
 			]

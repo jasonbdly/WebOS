@@ -12,6 +12,7 @@ export default class DOMNode {
 	constructor(target) {
 		this._id = _id++;
 		this._originalTarget = target;
+		this._inputHandlerApplied = false;
 
 		if (utils.isInst(target, DOMNode)) {
 			return target;
@@ -185,6 +186,15 @@ export default class DOMNode {
 		return this;
 	}
 
+	empty() {
+		if (utils.isNodeList(this.elem)) {
+			Array.from(this.elem).forEach(node => dom(node).empty());
+		} else {
+			this.elem.innerHTML = '';
+		}
+		return this;
+	}
+
 	parent() {
 		if (utils.isNodeList(this.elem)) {
 			return Array.from(this.elem).map(node => dom(node).parent());
@@ -256,6 +266,7 @@ export default class DOMNode {
 		} else {
 			this.elem.addEventListener(eventName, eventHandler);
 		}
+		return this;
 	}
 
 	off(eventName, eventHandler) {
@@ -264,6 +275,26 @@ export default class DOMNode {
 		} else {
 			this.elem.removeEventListener(eventName, eventHandler);
 		}
+		return this;
+	}
+
+	trigger(eventName, eventData) {
+		let event = null;
+
+		if (utils.isNodeList(this.elem)) {
+			Array.from(this.elem).forEach(node => dom(node).trigger(eventName, eventData));
+		} else {
+			if (window.CustomEvent) {
+				event = new CustomEvent(eventName, { detail: eventData });
+			} else {
+				event = document.createEvent('CustomEvent');
+				event.initCustomEvent(eventName, true, true, eventData);
+			}
+
+			this.elem.dispatchEvent(event);
+		}
+
+		return this;
 	}
 
 	ready(evtHandler) {
@@ -275,15 +306,46 @@ export default class DOMNode {
 		return this;
 	}
 
+	click(eventHandler) {
+		this.on('click', eventHandler);
+		return this;
+	}
+
 	keypress(eventHandler) {
 		this.on('keypress', eventHandler);
+		return this;
 	}
 
 	keyup(eventHandler) {
 		this.on('keyup', eventHandler);
+		return this;
 	}
 
 	keydown(eventHandler) {
 		this.on('keydown', eventHandler);
+		return this;
+	}
+
+	inputLine(eventHandler) {
+		this.on('inputLine', eventHandler);
+		if (!this._inputHandlerApplied) {
+
+			this.on('keypress', e => {
+				if (e.which === 13) {
+					this.trigger('inputLine', { value: this.value() });
+				}
+			});
+
+			this._inputHandlerApplied = true;
+		}
+		return this;
+	}
+
+	setSelectionRange(selectionStart, selectionEnd, selectionDirection) {
+		if (utils.isNodeList(this.elem)) {
+			Array.from(this.elem).forEach(node => dom(node).setSelectionRange(selectionStart, selectionEnd, selectionDirection));
+		} else {
+			this.elem.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+		}
 	}
 }

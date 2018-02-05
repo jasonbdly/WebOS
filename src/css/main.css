@@ -8,12 +8,14 @@ body, html {
 	height: 100vh;
 	overflow: hidden;
 	background-color: rgb(0, 0, 0);
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
 }
 
 .terminal {
 	background-color: rgb(0, 0, 0);
 	color: rgb(36, 206, 6);
 	font-size: 20pt;
+	padding-left: 10px;
 }
 
 .terminal.terminal-input {
@@ -27,7 +29,6 @@ body, html {
 
 .terminal.terminal-output {
 	white-space: pre-line;
-	padding-left: 10px;
 }
 
 .terminal.terminal-output > .status {
